@@ -3,6 +3,8 @@
   <head>
     <link href = "./styles/loginStyles.css" rel = "stylesheet" type = "text/css">
     <meta name="viewport" content="width=device-width" />
+    <meta charset="UTF-8">
+    <title>Login</title>
   </head>
   <body>
     <div class = "container">
@@ -10,7 +12,10 @@
         <img src = "./images/youShallNotPass.png">
         <form action="/login" method="post">
           <div>
-            <input type="password" name="password" placeholder = "Without a password..."/>
+            <!-- Passport.js likes to have a username posted in the http request -->
+            <input type = "text" name ="username" value ="user" class = "hideMe" />
+            <!-- The password it the only thing you actually need to enter -->
+            <input type="password" name="password" placeholder = "without a password"/>
           </div>
           <div>
             <input type="submit" value="Log In" class = "my-button" />
