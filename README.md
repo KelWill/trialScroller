@@ -1,2 +1,2 @@
-trialScroller
+Trial Scroller
 =============
