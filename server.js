@@ -44,11 +44,18 @@ passport.deserializeUser(function(id, done) {
 
 app.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }));
 
-app.get('/login', function(request, response){  response.sendfile('login.html'); });
+app.get('/login', function(request, response){
+  response.statusCode = 401;
+  console.log(response.statusCode);
+  response.sendfile('login.html');
+});
 
 app.get('*', function(request, response){
   if (request.user) handle(request, response);
-  else response.redirect('/login');
+  else {
+    response.statusCode = 401;
+    response.redirect('/login');
+  }
 });
 
 var handle = function(request, response){

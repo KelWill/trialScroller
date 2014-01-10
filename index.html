@@ -4,8 +4,10 @@
     <title>A Course</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset = "utf-8">
-    <!-- Bootstrap -->
-    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap and Menu Styling-->
+    <link href="./bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href = "./indexHelpers/jQuery.mmenu-master/src/css/jquery.mmenu.css" rel = "stylesheet">
+    <link href = "./styles/indexStyle.css" rel = "stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -15,6 +17,17 @@
     <![endif]-->
   </head>
   <body>
-    <h1>Hello, world!</h1>
+    <div class = "everything">
+      <nav id = "header"></nav>
+      <nav id = "navigation">
+        <ul></ul>
+      </nav>
+      <div class = "container content"></div>
+    </div>
+    <!-- TODO switch below to CDNs + create Grunt file-->
+    <script src = "./bower_components/jquery/jquery.min.js"></script>
+    <script src = "./bower_componenets/backbone-min.js"></script>
+    <script src = "./all.js"></script>
+    <script src = "./indexHelpers/jQuery.mmenu-master/src/js/jquery.mmenu.min.js"></script>
   </body>
 </html>

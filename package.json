@@ -19,6 +19,7 @@
     "express": "~3.4.7",
     "firebase": "~1.0.2",
     "passport": "~0.1.18",
-    "passport-local": "~0.1.6"
+    "passport-local": "~0.1.6",
+    "request": "~2.31.0"
   }
 }
