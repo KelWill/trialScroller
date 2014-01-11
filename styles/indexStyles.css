@@ -5,16 +5,87 @@
   white-space:nowrap
 }
 
-.contentSection, .contentSection img {
+body {
+  width: 100%;
+}
+
+#header {
+  position: fixed;
+  z-index: 10; 
+  width: 100%;
+  height: 5%;
+  background: rgba(255,255,255,0.5);
+}
+
+#navigation {
+  position: fixed;
+  left: 0;
+}
+
+.contentSection {
   height: 100%;
-  width: auto;
+  width: 700px;
   display: inline-block;
   *display:inline;/* For IE7*/
   *zoom:1;/* For IE7*/
 }
 
-.contentSection img {
+#navigation {
+  position: fixed;
+  left: 0;
+  top: 5%;
+  z-index: 10;
+  min-width: 20%;
+  background: rgba(1,1,1,0.5);
+}
 
+#navigation ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+#navigation ul li {
+  text-align: left;
+  line-height: 2em;
+  font-size: 2em;
+  border: 1px solid black;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+a:hover {
+  color: inherit;
+}
+
+#navigation ul li:hover {
+  cursor: pointer;
+  background: rgba(1,1,1,0.7); ;
+}
+#navigation ul li a {
+  text-decoration: none;
+  margin-left: 10px;
+}
+.contentSection img {
+  height: 90%;
+  width: auto;
+  min-width: 90%;
+  margin: auto;
+
+  display: inline-block;
+
+  margin: 5% 0;
   margin-left: 20px;
+}
+
+@media(max-width: 700px){
+  .contentSection {
+    width: 100%;
+    height: 100%;
+  }
+  .contentSection img {
+    width: 90%;
+    height: auto;
+  }
 }
 

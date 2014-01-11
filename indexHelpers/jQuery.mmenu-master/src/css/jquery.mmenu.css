@@ -6,16 +6,16 @@ html.mm-opened #mm-blocker,
 html.mm-opened .mm-fixed-top,
 html.mm-opened .mm-fixed-bottom,
 html.mm-opened .mm-menu.mm-horizontal > .mm-panel {
-  -webkit-transition: none 0.4s ease;
-  -moz-transition: none 0.4s ease;
-  -ms-transition: none 0.4s ease;
-  -o-transition: none 0.4s ease;
-  transition: none 0.4s ease;
-  -webkit-transition-property: top, right, bottom, left, border;
-  -moz-transition-property: top, right, bottom, left, border;
-  -ms-transition-property: top, right, bottom, left, border;
-  -o-transition-property: top, right, bottom, left, border;
-  transition-property: top, right, bottom, left, border; }
+  -webkit-transition: none 0.4s ease !important;
+  -moz-transition: none 0.4s ease !important;
+  -ms-transition: none 0.4s ease !important;
+  -o-transition: none 0.4s ease !important;
+  transition: none 0.4s ease !important;
+  -webkit-transition-property: top, right, bottom, left, border !important;
+  -moz-transition-property: top, right, bottom, left, border !important;
+  -ms-transition-property: top, right, bottom, left, border !important;
+  -o-transition-property: top, right, bottom, left, border !important;
+  transition-property: top, right, bottom, left, border !important; }
 html.mm-opened .mm-page,
 html.mm-opened #mm-blocker {
   left: 0%;
