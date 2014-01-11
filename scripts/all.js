@@ -62,8 +62,8 @@ var MenuView = Backbone.View.extend({
   events: {
   },
   tagName: 'ul',
+  className: 'list list-group',
   initialize: function(){
-    this.showing = true;
     this.render();
   },
   template: _.template('<li><a href = "#<%= name %>"><%= name %></a></li>'),
@@ -71,11 +71,6 @@ var MenuView = Backbone.View.extend({
     this.collection.forEach(function(model){
       this.$el.append(this.template(model.attributes));
     }, this);
-  },
-  toggle: function(){
-    if (this.showing) this.$el.hide();
-    else this.$el.show();
-    this.showing = !this.showing;
   }
 });
 
@@ -83,15 +78,15 @@ var HeaderView = Backbone.View.extend({
   events: {
     'click a.sections': 'toggleSectionMenu'
   },
-  tagName: 'ul',
+  tagName: 'div',
   initialize: function(){
     this.render();
   },
   render: function(){
-    this.$el.append('<a class = "sections" href = "#">Sections </a> <a class = "home" href = "#"> Home</a>');
+    this.$el.append('<a class = "sections" href = "#"><span class = "glyphicon glyphicon-align-justify"></span> Sections</a><a class = "home text-center" href = "#"><span class = "glyphicon glyphicon-home"></span> Home</a>');
   },
   toggleSectionMenu: function(){
-    this.sectionMenu.toggle();
+    $('#navigation').toggle();
   }
 });
 
@@ -120,7 +115,7 @@ fb.once('value', function(snapshot){
   //Adding to DOM
   $(document).ready(function(){
     $('body').append(sectionsView.el);
-    $('#header').append(new HeaderView(menuView).el);
+    $('#header').append(new HeaderView().el);
     $('#navigation').append(menuView.el);
     //setting up the menu
     $(".main").onepage_scroll({
