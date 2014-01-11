@@ -2,6 +2,9 @@
 // A section object has a name, (optional description), a content array, and a locked attribute.
 // These attributes are accessible through the section model's getters and setters
 var Section = Backbone.Model.extend({
+  initialize: function(){
+    console.log('things are being initialized');
+  },
   complete: function(){
     this.get('next').unlock();
   },
@@ -12,7 +15,9 @@ var Section = Backbone.Model.extend({
 var SectionView = Backbone.View.extend({
   initialize: function(){
     this.model.on('unlock', this.render);
+    this.render();
   },
+  className: "row",
   events: {
     'click a.complete': this.complete
   },
@@ -20,22 +25,18 @@ var SectionView = Backbone.View.extend({
     this.model.complete();
   },
   //currently just expecting images of various sizes
-  template: _.template( "<% _.each(content, function(img) { %><div class = 'content'> <img src = '<%= img %>'></div><% }); %>"),
+  template: _.template( "<% _.each(content, function(img) { %><div class = 'contentSection'> <img src = '<%= img %>'></div><% }); %>"),
   render: function(){
     if (this.model.get('locked')){
       //TODO create better locked screen, use really opaque fuzzing
-      return;
+      this.$el.append('<div class = "locked">LOCKED!</div>');
     } else {
-      var content = this.model.get('content');
-      for (var key in content){
-        this.$el.append(template(content[key]));
-      }
+      this.$el.append(this.template(this.model.attributes));
     }
   }
 });
 
 var Sections = Backbone.Collection.extend({
-  model: Section
 });
 
 var SectionsView = Backbone.View.extend({
@@ -43,13 +44,17 @@ var SectionsView = Backbone.View.extend({
     this.render();
   },
   render: function(){
+    var prev;
     this.collection.forEach(function(model){
       // Making sections into a quasi linked list (because they'll want to communicate)
       if (!prev) this.collection.set('head', model);
-      else (prev.set('next', model));
-      var prev = model;
+      else {
+        prev.set('next', model);
+        model.set('prev', prev);
+      }
+      prev = model;
       //creating views for sections
-      this.$el.append(new SectionView({model: model}));
+      this.$el.append(new SectionView({model: model}).el);
     }, this);
     this.collection.set('tail', this.collection.at(this.collection.length - 1));
     //TODO Completion
@@ -79,14 +84,16 @@ var fb = new Firebase('https://versaltrial.firebaseio.com/demo');
 //  as soon as data has been loaded generate models and views
 fb.once('value', function(snapshot){
   //Generating collections, models, and views
-  var sections = new Sections(snapshot.val());
+  var sections = new Sections();
+  //Backbone likes arrays rather than objects--this could be cleaned up slightly
+  _.each(snapshot.val(), function(value){
+    sections.add(new Section(value));
+  });
   var menuView = new MenuView({collection: sections});
   var sectionsView = new SectionsView({collection: sections});
-
   //Adding to DOM
   $('.content').append(sectionsView.el);
   $('#navigation').append(menuView.el);
-  debugger;
 });
 
 // var Router = Backbone.Router.extend({});
